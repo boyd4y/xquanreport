@@ -21,14 +21,15 @@ const canvasGradient = createVerticalLinearGradient([
 class AreaChart extends React.Component {
 	render() {
 		const { data, type, width, ratio } = this.props;
+		console.log(data);
 		return (
 			<ChartCanvas ratio={ratio} width={width} height={400}
 				margin={{ left: 50, right: 50, top: 10, bottom: 30 }}
 				seriesName="MSFT"
 				data={data} type={type}
-				xAccessor={d => d.date}
+				xAccessor={d => d ? d.date : null}
 				xScale={scaleTime()}
-				xExtents={[new Date(2011, 0, 1), new Date(2013, 0, 2)]}
+				// xExtents={[new Date(2011, 0, 1), new Date(2013, 0, 2)]}
 			>
 				<Chart id={0} yExtents={d => d.close}>
 					<XAxis axisAt="bottom" orient="bottom" ticks={6}/>

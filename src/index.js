@@ -12,24 +12,7 @@ import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 const { TabPane } = Tabs;
 const { Title } = Typography;
 
-const dataSource = [
-	{
-	  key: '1',
-	  type: 'long',
-	  price: 32,
-	  orderId: '128371837128',
-	  datetime: "2020-10-01 10:00:00"
-	},
-	{
-	  key: '2',
-	  type: 'short',
-	  price: 33,
-	  orderId: '98131731273',
-	  datetime: "2020-10-01 11:00:00"
-	},
-  ];
-  
-  const columns = [
+const columns = [
 	{
 	  title: '类型',
 	  dataIndex: 'type',
@@ -53,7 +36,6 @@ const dataSource = [
 ];
 
 function paginate(array, page_size, page_number) {
-	// human-readable page numbers usually start with 1, so we reduce 1 in the first argument
 	return array.slice((page_number - 1) * page_size, page_number * page_size);
 }
 
@@ -62,7 +44,7 @@ class ChartComponent extends React.Component {
 		let data = getData();
 		let orders = getOrders();
 
-		// console.log(data);
+		console.log(data);
 		this.setState({ data, orders });
 	}
 	render() {
@@ -86,7 +68,9 @@ class ChartComponent extends React.Component {
 				</Row>
 				<Row style={{margin: "50px"}}>
 					<Col span="12">
-						<AreaChart data={this.state.data} />
+						{
+							this.state.data ? <AreaChart data={this.state.data} /> : null
+						}
 					</Col>
 					<Col span="12">
 						<Table dataSource={this.state.orders} pagination={{pageSize: 5}} columns={columns} />
